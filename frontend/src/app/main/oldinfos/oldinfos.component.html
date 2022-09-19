@@ -1,0 +1,39 @@
+<app-sidenav></app-sidenav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            &nbsp;
+        </div>
+        <div class="col-sm-6 centerClass">
+            <br>
+            <h3 class="centerClass"><b>Старија обавештења: </b></h3>
+                <div *ngIf="starijaObavestenja.length != 0">
+                    <ul>
+                        <li *ngFor="let obavestenje of starijaObavestenja">
+                            <table class="table table-secondary table-stripped table-bordered table-hover infoTable">
+                                <thead>
+                                    <tr class="table-active">
+                                        <th>{{obavestenje.naslov}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <td><b>{{obavestenje.datum_od}} - {{obavestenje.datum_do}}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{obavestenje.tekst}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="starijaObavestenja.length == 0">
+                    <span class="alert alert-warning">Нема објављених обавештења у последњих 30 дана! </span>
+                </div>
+        </div>
+        <div class="col-sm-3">
+            &nbsp;
+        </div>
+    </div>
+</div>

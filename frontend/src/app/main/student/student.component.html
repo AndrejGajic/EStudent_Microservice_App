@@ -1,0 +1,69 @@
+<app-sidenav></app-sidenav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            &nbsp;
+        </div>
+        <div class="col-sm-6 centerClass">
+            <br>
+            <h3><b>Подаци о студенту: </b></h3>
+            <br>
+            <table class="table table-stripped table-bordered table-hover studentTable">
+                <tbody>
+                    <tr>
+                        <td class="table-primary">Број индекса: </td>
+                        <td>{{brojIndeksa}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-primary">Име и презиме: </td>
+                        <td>{{student.ime}} {{student.prezime}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-primary">Име родитеља: </td>
+                        <td>{{student.ime_roditelja}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-primary">Пол: </td>
+                        <td>{{student.pol}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-primary">Датум рођења: </td>
+                        <td>{{student.datum}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-primary">Место рођења: </td>
+                        <td>{{student.mesto_rodjenja}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-primary">ЈМБГ: </td>
+                        <td>{{student.JMBG}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-primary">Е-маил: </td>
+                        <td>{{student.email}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-primary">Телефон: </td>
+                        <td>{{student.telefon}}</td>
+                    </tr>
+                    <tr>
+                        <td class="table-primary">Стање на рачуну: </td>
+                        <td>{{student.novac}} РСД</td>
+                    </tr>
+                    <tr>
+                        <td class="table-primary">Уписана година: </td>
+                        <td>{{student.upisana_godina}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <div *ngIf="student.slika != ''" class="centerClass">
+                <img [src]="student.slika" class="studentPicture">
+            </div>
+            <div *ngIf="student.slika == ''" class="centerClass">
+                <img src="../../../assets/nophoto.jpg" class="studentPicture">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 void">
+            &nbsp;
+        </div>
+        <div class="col-sm-6 base">
+            <br>
+            <div>
+                <div class="form-group">
+                    <label for="username">Корисничко име: </label>
+                    <input type="text" class="form-control" placeholder="ga20180303" [(ngModel)]="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Лозинка: </label>
+                    <input type="password" class="form-control" placeholder="**********" [(ngModel)]="password">
+                </div>
+                <br>
+                <div class="centerClass">
+                    <button class="btn btn-primary" (click)="login()">&nbsp;&nbsp;Пријави се&nbsp;&nbsp;</button>
+                </div>
+                <br><br>
+                <div class="centerClass">
+                    <span class="alert alert-danger" *ngIf="errorMessage!=''">{{errorMessage}}</span>
+                </div>
+            </div>
+            <br>
+            <div>
+                <h3 class="centerClass"><b>Важне информације: </b></h3>
+                <div *ngIf="glavnaObavestenja.length != 0">
+                    <table class="table table-primary table-stripped table-bordered table-hover infoTable">
+                        <tbody>
+                            <tr *ngFor="let obavestenje of glavnaObavestenja">
+                                <td>{{obavestenje.tekst}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="glavnaObavestenja.length == 0">
+                    <span class="alert alert-warning">Нема важних информација у тренутку!</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 void">
+            &nbsp;
+        </div>
+    </div>
+</div>

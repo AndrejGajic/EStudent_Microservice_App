@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <h2><div style="font-size: 20px">еСтудент &nbsp; &nbsp; &nbsp;</div></h2>
+        <button mat-button class="matButton" (click)="relocate('home')"><mat-icon>home</mat-icon> Почетна страница </button>
+        &nbsp; &nbsp;
+        <button mat-button class="matButton" (click)="relocate('oldinfos')"> Стара обавештења </button>
+        &nbsp; &nbsp;
+        <button mat-button class="matButton" (click)="examMenu=!examMenu"> Испити </button>
+        &nbsp; &nbsp;
+        <button mat-button class="matButton"> Финансије (школарине и уплате) </button>
+        &nbsp; &nbsp;
+        <button mat-button class="matButton"> Анкете </button>
+        &nbsp; &nbsp;
+        <button mat-button class="matButton" (click)="relocate('measures')"> Дисциплинске мере </button>
+        &nbsp; &nbsp;
+        <button mat-button class="matButton" (click)="relocate('student')"> Подаци о студенту </button>
+        &nbsp; &nbsp;
+        <button mat-button class="matButton" (click)="logout()"> Крај рада</button>
+        &nbsp; &nbsp;
+    </mat-toolbar-row>
+    <mat-toolbar-row *ngIf="examMenu" class="centerClass">
+        <button mat-button class="matButton" (click)="relocate('courses')"> Приказ свих курсева </button>
+        <button mat-button class="matButton" (click)="relocate('passedexams')"> Положени испити </button>
+        <button mat-button class="matButton" (click)="relocate('registerexams')"> Пријава испита </button>
+        <button mat-button class="matButton" (click)="relocate('registeredexams')"> Пријављени испити </button>
+    </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,55 @@
+<app-sidenav></app-sidenav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-1">
+            &nbsp;
+        </div>
+        <div class="col-sm-10 centerClass">
+            <br>
+            <h2>Положени испити: </h2>
+            <br>
+            <p hidden="true">{{passed?</p>
+            <div *ngIf="passed.length != 0">
+                <table class="table table-success table-stripped table-bordered table-hover infoTable">
+                    <thead>
+                        <th>ИД </th>
+                        <th>Шифра </th>
+                        <th>Назив </th>
+                        <th>Тип предмета </th>
+                        <th>Оцена </th>
+                        <th>ЕСПБ </th>
+                        <th>Испитни рок </th>
+                        <th>Датум полагања </th>
+                        <th>Потписао професор </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ispit of passed; let i = index">
+                            <td>{{i + 1}} </td>
+                            <td>{{ispit.sifra}} </td>
+                            <td>{{ispit.naziv}} </td>
+                            <td *ngIf="ispit.izborni">Изборни </td>
+                            <td *ngIf="!ispit.izborni">Обавезни </td>
+                            <td>{{ispit.ocena}}</td>
+                            <td>{{ispit.espb}}</td>
+                            <td>{{ispit.rok}}</td>
+                            <td>{{ispit.datum_polaganja}}</td>
+                            <td>{{ispit.potpisao}}</td>
+                        </tr>
+                        <tr style="background-color: green;">
+                            <td colspan="3">Положених испита: {{passed.length}}</td>
+                            <td colspan="3">Укупан број ЕСПБ поена: {{totalEspb}}</td>
+                            <td colspan="3">Просечна оцена: {{avgMark}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div *ngIf="passed.length == 0">
+                <span class="alert alert-danger">Нисте још увек положили ни један испит!</span>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            &nbsp;
+        </div>
+    </div>
+</div>

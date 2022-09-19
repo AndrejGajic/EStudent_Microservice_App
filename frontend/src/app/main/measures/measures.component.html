@@ -1,0 +1,38 @@
+<app-sidenav></app-sidenav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            &nbsp;
+        </div>
+        <div class="col-sm-6 centerClass">
+            <br>
+            <h3><b>Подаци о дисциплинским мерама студента: </b></h3>
+            <br>
+            <div *ngIf="mere.length != 0">
+                <table class="table table-stripped table-bordered table-hover measureTable">
+                    <thead>
+                        <th>Разлог доношења</th>
+                        <th>Датум доношења </th>
+                        <th>Број забрањених рокова </th>
+                        <th>Да ли је истекла </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let mera of mere" [ngClass]="mera.istekla ? 'expired' : 'notexpired'">
+                            <td>{{mera.razlog}}</td>
+                            <td>{{mera.datum_donosenja}}</td>
+                            <td>{{mera.zabrana}}</td>
+                            <td *ngIf="mera.istekla">Да</td>
+                            <td *ngIf="!mera.istekla">Не</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="mere.length == 0">
+                <span class="alert alert-success">Нисте имали ни једну дисциплинску меру!</span>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            &nbsp;
+        </div>
+    </div>
+</div>

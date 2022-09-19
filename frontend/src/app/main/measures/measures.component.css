@@ -1,0 +1,24 @@
+.measureTable {
+    border-width: 5px;
+    border-color: darkgray;
+    vertical-align: middle;
+}
+
+.measureTable thead {
+    border-width: 1px;
+    border-color: darkgray;
+    background-color:darkcyan;
+}
+
+.measureTable th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.expired {
+    background-color: gray;
+}
+
+.notexpired {
+    background-color: red;
+}

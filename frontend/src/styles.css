@@ -1,0 +1,118 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.background-image {
+/*background-image: url('assets/bg.jpg');
+height: 100%;
+background-repeat: no-repeat;
+background-size: cover;
+background-attachment: scroll;*/
+background-color: #ccc;
+}
+
+.errorClass {
+color: red;
+}
+.successClass {
+color: green;
+}
+.bold {
+font-weight: bold;
+}
+
+.centerClass {
+text-align: center;
+}
+.header {
+    text-align: center;
+    background-color: darkviolet;
+    width: 100%;
+    height: 60px;
+}
+
+.headerImage {
+  height: 120px;
+  width: 50%;
+}
+
+.footer {
+    text-align: center;
+    background-color: lightblue;
+    position: fixed;
+    padding: 10px 10px 0px 10px;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.tab {
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    text-align: center;
+  }
+  .tab button {
+    float: center;
+    border: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }
+
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  .tab button.active {
+    background-color: #ccc;
+  }
+  
+  .tabcontent {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+  }
+  
+  .infoTable tr, td{
+    border-width: 2px;
+    border-color: black;
+  }
+
+  .studentTable {
+    border-color: darkgray;
+  }
+
+  .mat-sidenav-container {
+    height: 75%;
+  }
+
+  .mat-sidenav {
+    width: 100px;
+    background-color: blueviolet;
+  }
+
+  .sidemenu {
+    background-color: blueviolet;
+  }
+
+  .container-fluid {
+    min-height: 75%;
+  }
+
+  .matButton {
+    font-size: 16px;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  .studentPicture {
+    width: 200px;
+    height: 250px;
+    margin-top: 100px;
+    border-color: darkgray;
+    border-width: 2px;
+  }
