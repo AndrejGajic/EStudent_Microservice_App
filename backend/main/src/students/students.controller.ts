@@ -1,6 +1,5 @@
 import { Controller, Get, Post, Body, Req, Res } from '@nestjs/common';
 import { GetMeasuresDto } from './dtos/getMeasures.dto';
-import { IndexDto } from './dtos/index.dto';
 import { LoginDto } from './dtos/login.dto';
 import { StudentsService } from './students.service';
 
@@ -32,26 +31,6 @@ export class StudentsController {
     @Post('/getStudentMeasures')
     async getStudentMeasures(@Body() body: GetMeasuresDto) {
         return this.studentService.getStudentMeasures(body);
-    }
-
-    @Get('/getAllCourses')
-    async getAllCourses() {
-        return this.studentService.getAllCourses();
-    }
-
-    @Get('/getAllPeriods')
-    async getAllPeriods() {
-        return this.studentService.getAllPeriods();
-    }
-
-    @Get('/getAllPassedExams')
-    async getAllPassedExams() {
-        return this.studentService.getAllPassedExams();
-    }
-
-    @Post('/getPassedExamsForStudent')
-    async getPassedExamsForStudent(@Body() body: IndexDto) {
-        return this.studentService.getPassedExamsForStudent(body);
     }
 
 }

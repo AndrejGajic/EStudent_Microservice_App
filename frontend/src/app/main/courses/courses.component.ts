@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from '../main.service';
+import { ExamsService } from '../exams.service';
 import { Kurs } from '../models/kurs';
 
 @Component({
@@ -9,7 +9,7 @@ import { Kurs } from '../models/kurs';
 })
 export class CoursesComponent implements OnInit {
 
-  constructor(private mainService: MainService) { }
+  constructor(private examsService: ExamsService) { }
 
   ngOnInit(): void {
     this.loadAllCourses();
@@ -25,7 +25,7 @@ export class CoursesComponent implements OnInit {
   osmiSem: Kurs[] = [];
 
   loadAllCourses() {
-    this.mainService.getAllCourses().subscribe((courses: Kurs[]) => {
+    this.examsService.getAllCourses().subscribe((courses: Kurs[]) => {
       for(let i = 0; i < courses.length; i++) {
         switch(courses[i].semestar) {
           case 1: 

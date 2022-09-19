@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from '../main.service';
+import { ExamsService } from '../exams.service';
 import { Ispit } from '../models/ispit';
 import { IspitInfo } from '../models/ispit_info';
 import { Kurs } from '../models/kurs';
@@ -12,7 +12,7 @@ import { PolozeniIspiti } from '../models/polozeni_ispiti';
 })
 export class PassedexamsComponent implements OnInit {
 
-  constructor(private mainService: MainService) { }
+  constructor(private examsService: ExamsService) { }
 
   courses: Kurs[] = [];
   passed: IspitInfo[] = [];
@@ -24,7 +24,7 @@ export class PassedexamsComponent implements OnInit {
   async ngOnInit() {
     this.index = JSON.parse(localStorage.getItem('student')).indeks;
     await this.loadCourses();
-    this.mainService.getPassedExamsForStudent(this.index).subscribe((exams: Ispit[]) => {
+    this.examsService.getPassedExamsForStudent(this.index).subscribe((exams: Ispit[]) => {
       for(let i = 0; i < exams.length; i++) {
         let currCourse = this.courses.find(obj => {return obj.sifra == exams[i].sifra});
         console.log(exams[i].sifra);
@@ -38,7 +38,7 @@ export class PassedexamsComponent implements OnInit {
   }
 
   async loadCourses() {
-    this.mainService.getAllCourses().subscribe((courses: Kurs[]) => {
+    this.examsService.getAllCourses().subscribe((courses: Kurs[]) => {
       this.courses = courses;
     });
   }
