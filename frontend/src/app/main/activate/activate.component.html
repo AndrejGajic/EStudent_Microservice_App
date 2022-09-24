@@ -1,0 +1,35 @@
+<app-sidenav></app-sidenav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            &nbsp;
+        </div>
+        <div class="col-sm-6 centerClass">
+            <br>
+            <br>
+            <h1>Активација студентског налога</h1>
+            <br>
+            <br>
+            <h2>Како бисте активирали студентски налог, морате отићи у студентску службу како бисте добили код за активацију налога.</h2>
+            <br>
+            <table class="table table-primary table-stripped table-bordered table-hover infoTable">
+                <tbody>
+                    <tr>
+                        <td>Код: </td>
+                        <td><input type="text" [(ngModel)]="code"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button class="btn btn-success" (click)="activate()">Активирај налог</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <div class="centerClass">
+                <span class="alert alert-danger" *ngIf="errorMessage!=''">{{errorMessage}}</span>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            &nbsp;
+        </div>
+    </div>
+</div>

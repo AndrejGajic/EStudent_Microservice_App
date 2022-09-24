@@ -17,6 +17,11 @@ import { CoursesComponent } from './courses/courses.component';
 import { PassedexamsComponent } from './passedexams/passedexams.component';
 import { RegisterexamsComponent } from './registerexams/registerexams.component';
 import { RegisteredexamsComponent } from './registeredexams/registeredexams.component';
+import { CoursechoosingComponent } from './coursechoosing/coursechoosing.component';
+import { ActivateComponent } from './activate/activate.component';
+import { ChosencoursesComponent } from './chosencourses/chosencourses.component';
+import { FinancesComponent } from './finances/finances.component';
+import { SurveysComponent } from './surveys/surveys.component';
 
 
 
@@ -34,7 +39,12 @@ import { RegisteredexamsComponent } from './registeredexams/registeredexams.comp
     CoursesComponent,
     PassedexamsComponent,
     RegisterexamsComponent,
-    RegisteredexamsComponent
+    RegisteredexamsComponent,
+    CoursechoosingComponent,
+    ActivateComponent,
+    ChosencoursesComponent,
+    FinancesComponent,
+    SurveysComponent
   ],
   imports: [
     CommonModule,

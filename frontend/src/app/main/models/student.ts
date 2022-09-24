@@ -14,4 +14,9 @@ export class Student {
     novac: number;
     slika: string;
     upisana_godina: number;
+    aktiviran: boolean;
+    budzet: boolean;
+    ukupno_espb: number;
+    prosecna_ocena: number;
+    dugovanje: number;
 }

@@ -8,6 +8,12 @@ export class Exam {
     @Prop()
     sifra: string;
     @Prop()
+    broj_polaganja: number;
+    @Prop()
+    semestar: number;
+    @Prop()
+    izborni: boolean;
+    @Prop()
     ocena: number;
     @Prop()
     rok: string;

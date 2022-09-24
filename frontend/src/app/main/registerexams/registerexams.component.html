@@ -1,1 +1,57 @@
-<p>registerexams works!</p>
+<app-sidenav></app-sidenav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            &nbsp;
+        </div>
+        <div class="col-sm-8 centerClass">
+            <br>
+            <h2>Пријава испита</h2>
+            <br>
+            <div *ngIf="timetable == null">
+                <span class="alert alert-danger">Пријава испита није у току!</span>
+            </div>
+            <div *ngIf="timetable != null">
+                <br>
+                <table class="table table-warning table-stripped table-bordered table-hover infoTable">
+                    <tbody>
+                        <tr>
+                            <td>Тренутни рок </td>
+                            <td>{{timetable.rok}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-success table-stripped table-bordered table-hover infoTable">
+                    <thead>
+                        <tr>
+                            <th>ИД </th>
+                            <th>Шифра </th>
+                            <th>Назив </th>
+                            <th>Тип предмета </th>
+                            <th>ЕСПБ </th>
+                            <th>Оцена </th>
+                            <th>Датум полагања </th>
+                            <th>Пријави</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ispit of examsForRegistering; let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{ispit.sifra}}</td>
+                            <td>{{ispit.naziv}}</td>
+                            <td *ngIf="ispit.izborni">Изборни предмет</td>
+                            <td *ngIf="!ispit.izborni">Обавезан предмет</td>
+                            <td>{{ispit.espb}}</td>
+                            <td>{{ispit.ocena}}</td>
+                            <td>{{ispit.datum_polaganja}}</td>
+                            <td><button class="btn btn-warning" (click)="register(i)">Пријави испит</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            &nbsp;
+        </div>
+    </div>
+</div>

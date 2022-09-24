@@ -54,7 +54,7 @@ export class CoursesComponent implements OnInit {
             break;
         }
       }
-    })
+    });
   }
 
 }

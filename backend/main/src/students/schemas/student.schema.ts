@@ -35,6 +35,16 @@ export class Student {
     slika: string;
     @Prop()
     upisana_godina: number;
+    @Prop()
+    aktiviran: boolean;
+    @Prop()
+    budzet: boolean;
+    @Prop()
+    ukupno_espb: number;
+    @Prop()
+    prosecna_ocena: number;
+    @Prop()
+    dugovanje: number;
 }
 
 export const StudentSchema = SchemaFactory.createForClass(Student);

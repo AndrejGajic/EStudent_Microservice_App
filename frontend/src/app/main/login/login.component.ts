@@ -49,7 +49,12 @@ export class LoginComponent implements OnInit {
         else {
          this.student = json['student'];
          localStorage.setItem('student', JSON.stringify(this.student));
-         this.router.navigate(['/home']);
+         if(this.student.aktiviran) {
+            this.router.navigate(['/home']);
+         }
+         else {
+            this.router.navigate(['/activate']);
+         }
         }
       })
     }

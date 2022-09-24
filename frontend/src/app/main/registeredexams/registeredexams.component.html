@@ -1,1 +1,50 @@
-<p>registeredexams works!</p>
+<app-sidenav></app-sidenav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-1">
+            &nbsp;
+        </div>
+        <div class="col-sm-10 centerClass">
+            <br>
+            <h2>Пријављени испити: </h2>
+            <br>
+            <div *ngIf="registered.length != 0">
+                <table class="table table-success table-stripped table-bordered table-hover infoTable">
+                    <thead>
+                        <tr>
+                            <th>ИД </th>
+                            <th>Шифра </th>
+                            <th>Назив </th>
+                            <th>Тип предмета </th>
+                            <th>Оцена </th>
+                            <th>ЕСПБ </th>
+                            <th>Испитни рок </th>
+                            <th>Датум полагања </th>
+                            <th>Потписао професор </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ispit of registered; let i = index">
+                            <td>{{i + 1}} </td>
+                            <td>{{ispit.sifra}} </td>
+                            <td>{{ispit.naziv}} </td>
+                            <td *ngIf="ispit.izborni">Изборни </td>
+                            <td *ngIf="!ispit.izborni">Обавезни </td>
+                            <td>{{ispit.ocena}}</td>
+                            <td>{{ispit.espb}}</td>
+                            <td>{{ispit.rok}}</td>
+                            <td>{{ispit.datum_polaganja}}</td>
+                            <td>{{ispit.potpisao}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="registered.length == 0">
+                <span class="alert alert-warning">Немате ни један пријављени испит!</span>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            &nbsp;
+        </div>
+    </div>
+</div>

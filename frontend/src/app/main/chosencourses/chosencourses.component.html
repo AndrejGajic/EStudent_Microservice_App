@@ -1,0 +1,78 @@
+<app-sidenav></app-sidenav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-1">
+            &nbsp;
+        </div>
+        <div class="col-sm-10 centerClass">
+            <br>
+            <h2>Цена једног ЕСПБ </h2>
+            <br>
+            <table class="table table-warning table-stripped table-bordered table-hover infoTable">
+                <thead>
+                    <tr>
+                        <th>Прво праћење</th>
+                        <th>Поновно праћење</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{espbPrice}} РСД</td>
+                        <td>{{espbPrice}} РСД</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <h2>Изабрани предмети: </h2>
+            <br>
+            <table class="table table-primary table-stripped table-bordered table-hover infoTable">
+                <thead>
+                    <tr>
+                        <th>Шифра предмета </th>
+                        <th>Назив предмета </th>
+                        <th>Тип предмета </th>
+                        <th>Семестар</th>
+                        <th>ЕСПБ </th>
+                        <th>Цена </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let predmet of chosen">
+                        <td>{{predmet.sifra}}</td>
+                        <td>{{predmet.naziv}}</td>
+                        <td *ngIf="predmet.izborni">Изборни</td>
+                        <td *ngIf="!predmet.izborni">Обавезан</td>
+                        <td>{{predmet.semestar}}</td>
+                        <td>{{predmet.espb}}</td>
+                        <td *ngIf="student.budzet">0</td>
+                        <td *ngIf="!student.budzet">{{predmet.espb * espbPrice}} РСД</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-success table-stripped table-bordered table-hover infoTable">
+                <thead>
+                    <tr>
+                        <th>Уписано ЕСПБ </th>
+                        <th>Укупна цена </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{totalEspb}}</td>
+                        <td>{{totalPrice}} РСД</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <button class="btn btn-success" (click)="choose()">Изабери предмете или промени изабране</button>
+            <br><br><br>
+            <div *ngIf="cannotChoose">
+                <span class="alert alert-danger">Бирање предмета није у току!</span>
+            </div>
+            <br><br><br>
+        </div>
+        <div class="col-sm-1">
+            &nbsp;
+        </div>
+    </div>
+</div>

@@ -39,4 +39,19 @@ export class MainService {
     };
     return this.http.post(`${this.studentsURI}/getPassedExamsForStudent`, body);
   }
+
+  activate(index: string, code: string) {
+    const body = {
+      index: index,
+      code: code
+    };
+    return this.http.post(`${this.studentsURI}/activate`, body);
+  }
+
+  getStudent(index: string) {
+    const body = {
+      indeks: index
+    }
+    return this.http.post(`${this.studentsURI}/getStudent`, body);
+  }
 }
