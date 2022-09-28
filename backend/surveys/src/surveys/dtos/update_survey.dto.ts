@@ -4,4 +4,5 @@ export class UpdateSurveyDto {
     answer_2: number;
     answer_3: number;
     answer_4: number;
+    index: string;
 }

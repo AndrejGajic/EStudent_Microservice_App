@@ -21,6 +21,8 @@ export class Exam {
     datum_polaganja: string;
     @Prop()
     potpisao: string;
+    @Prop()
+    anketa: boolean;
 }
 
 export const ExamSchema = SchemaFactory.createForClass(Exam);

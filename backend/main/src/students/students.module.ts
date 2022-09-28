@@ -11,7 +11,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
   imports: [
     ClientsModule.register([
       { name: 'MAIN_EXAMS_SERVICE', transport: Transport.TCP, options: {port: 3001} },
-      { name: 'MAIN_FINANCES_SERVICE', transport: Transport.TCP, options: {port: 3002} },
       { name: 'MAIN_SURVEYS_SERVICE', transport: Transport.TCP, options: {port: 3003}}
     ]),
     MongooseModule.forFeature([{name: Student.name, schema: StudentSchema}]),

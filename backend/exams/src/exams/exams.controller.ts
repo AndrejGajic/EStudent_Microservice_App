@@ -9,6 +9,7 @@ import { SetDebtEvent } from './events/setdebt.event';
 import { RegisterExamDto } from './dtos/registerExam.dto';
 import { deprecate } from 'util';
 import { InsertTransactionEvent } from './events/insert_transaction.event';
+import { UpdateSurveysEvent } from './events/update_surveys.event';
 
 @Controller('exams')
 export class ExamsController {
@@ -51,6 +52,11 @@ export class ExamsController {
     async getPassedExamsForStudent(@Body() body: IndexDto) {
         // this.clientMain.emit('test2', 'Testttt222');
         return this.examsService.getPassedExamsForStudent(body);
+    }
+
+    @Post('/getPassedExamsWithoutSurvey')
+    async getPassedExamsWithoutSurvey(@Body() body: IndexDto) {
+        return this.examsService.getPassedExamsWithoutSurvey(body);
     }
 
     // REGISTERED EXAMS
@@ -110,7 +116,7 @@ export class ExamsController {
         return await this.examsService.registerExam(body);
     }
 
-    @Post('unregisterExam')
+    @Post('/unregisterExam')
     async unregisterExam(@Body() body: RegisterExamDto) {
         return await this.examsService.unregisterExam(body);
     }
@@ -125,5 +131,10 @@ export class ExamsController {
     @EventPattern('activate')
     async activate(index: string) {
         this.examsService.createStudentInfo(index);
+    }
+
+    @EventPattern('update_surveys')
+    async updateSurveys(event: UpdateSurveysEvent) {
+        this.examsService.updateSurveys(event);
     }
 }

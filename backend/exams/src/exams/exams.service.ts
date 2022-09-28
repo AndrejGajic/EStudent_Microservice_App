@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { ChosenExamsDto } from './dtos/chosenExams.dto';
 import { IndexDto } from './dtos/index.dto';
 import { RegisterExamDto } from './dtos/registerExam.dto';
+import { UpdateSurveysEvent } from './events/update_surveys.event';
 import { Course, CourseDocument } from './schemas/course.schema';
 import { CourseTimetable, CourseTimetableDocument } from './schemas/course_timetable.schema';
 import { Exam, ExamDocument } from './schemas/exam.schema';
@@ -81,6 +82,17 @@ export class ExamsService {
             totalEspb: totalEspb,
             avgMark: avgMark
         };
+    }
+
+    async getPassedExamsWithoutSurvey(body: IndexDto) {
+        let info = await this.studentExamsInfoModel.findOne({'student': body.index}).exec();
+        let exams: Exam[] = [];
+        for(let i = 0; i < info.polozeni_ispiti.length; i++) {
+            if(!info.polozeni_ispiti[i].anketa) {
+                exams.push(info.polozeni_ispiti[i]);
+            }
+        }
+        return exams;
     }
 
     // REGISTERED EXAMS
@@ -317,6 +329,19 @@ export class ExamsService {
             espb_cetvrta: 0
         });
         await newInfo.save();
+    }
+
+    async updateSurveys(event: UpdateSurveysEvent) {
+        let info = await this.studentExamsInfoModel.findOne({'student': event.index}).exec();
+        for(let i = 0; i < info.polozeni_ispiti.length; i++) {
+            if(info.polozeni_ispiti[i].sifra == event.code) {
+                console.log(info.polozeni_ispiti[i]);
+                info.polozeni_ispiti[i].anketa = true;
+                info.markModified('polozeni_ispiti');
+                await info.save();
+                break;
+            }
+        }
     }
 
 }

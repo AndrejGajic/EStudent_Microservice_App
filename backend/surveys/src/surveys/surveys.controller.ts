@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Inject } from '@nestjs/common';
 import { SurveysService } from './surveys.service';
 import { ClientProxy, EventPattern, MessagePattern } from '@nestjs/microservices';
 import { UpdateSurveyDto } from './dtos/update_survey.dto';
+import { UpdateSurveysEvent } from './events/update_surveys.event';
 
 @Controller('surveys')
 export class SurveysController {
@@ -15,9 +16,12 @@ export class SurveysController {
     }
 
     @Post('/updateSurvey')
-    async updateSurvey(@Body() updateSurveyDto: UpdateSurveyDto) {
-        // this.clientExams.emit(updateSurveysDto.code);
-        return this.surveysService.updateSurvey(updateSurveyDto);
+    async updateSurvey(@Body() body: UpdateSurveyDto) {
+        let json = await this.surveysService.updateSurvey(body);
+        if(json['status'] == 'OK') {
+            this.clientExams.emit('update_surveys', new UpdateSurveysEvent(body.index, body.code));
+        }
+        return json;
     }
 
 }

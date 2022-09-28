@@ -27,7 +27,12 @@ export class SurveysService {
             survey.drugo[body.answer_2 - 1]++;
             survey.trece[body.answer_3 - 1]++;
             survey.cetvrto[body.answer_4 - 1]++;
-            await survey.save();
+            await this.surveyModel.findOneAndUpdate({'sifra':body.code}, {
+                'prvo': survey.prvo,
+                'drugo': survey.drugo,
+                'trece': survey.trece,
+                'cetvrto': survey.cetvrto
+            }).exec();
             return {
                 status : 'OK'
             };
