@@ -21,6 +21,7 @@
                             <th>Испитни рок </th>
                             <th>Датум полагања </th>
                             <th>Потписао професор </th>
+                            <th>Одјави </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,13 +36,20 @@
                             <td>{{ispit.rok}}</td>
                             <td>{{ispit.datum_polaganja}}</td>
                             <td>{{ispit.potpisao}}</td>
+                            <td><button class="btn btn-danger" (click)="unregister(i)">Одјави испит</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            <br>
             <div *ngIf="registered.length == 0">
                 <span class="alert alert-warning">Немате ни један пријављени испит!</span>
             </div>
+            <br><br>
+            <div *ngIf="errorMessage != ''">
+                <span class="alert alert-danger">{{errorMessage}}</span>
+            </div>
+            <br><br>
         </div>
         <div class="col-sm-1">
             &nbsp;

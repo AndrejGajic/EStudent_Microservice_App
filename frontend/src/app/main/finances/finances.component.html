@@ -1,1 +1,42 @@
-<p>finances works!</p>
+<app-sidenav></app-sidenav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            &nbsp;
+        </div>
+        <div class="col-sm-8 centerClass">
+            <br>
+            <h2>Приказ трансакција на студенском рачуну</h2>
+            <br>
+            <button class="btn btn-primary" (click)="seeTransactions()">Прикажи трансакције</button>
+            <br><br>
+            <h2>Уплата преко кредитне картице</h2>
+            <br>
+            <button class="btn btn-primary" (click)="creditCardPay()">Уплати износ преко кредитне картице</button>
+            <br><br><hr>
+            <h2>Уплата преко уплатнице</h2>
+            <br>
+            <img src="../../../assets/uplatnica.png" alt="">
+            <br><br>
+            <table class="table table-primary table-stripped table-bordered table-hover infoTable">
+                <tbody>
+                    <tr>
+                        <td>Попуњену уплатницу уплатите у било којој пошти или мењачници. Уплаћен износ ће бити доступан на студентском налогу у року од 3 радна дана. Износ рате школарине и цене пријаве испита и осталих факултетских услуга можете погледати у ценовнику факултета, док лично дуговање можете видети на вашем профилу.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-primary table-stripped table-bordered table-hover infoTable">
+                <tbody>
+                    <tr>
+                        <td>Линк ка ценовнику: </td>
+                        <td><a href="https://www.etf.bg.ac.rs/sr/studiranje/cenovnik#gsc.tab=0">ЦЕНОВНИК ФАКУЛТЕТА</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br><br><br>
+        </div>
+        <div class="col-sm-2">
+            &nbsp;
+        </div>
+    </div>
+</div>

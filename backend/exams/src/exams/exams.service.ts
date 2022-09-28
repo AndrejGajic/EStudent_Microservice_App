@@ -3,6 +3,7 @@ import { InjectModel, Schema } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ChosenExamsDto } from './dtos/chosenExams.dto';
 import { IndexDto } from './dtos/index.dto';
+import { RegisterExamDto } from './dtos/registerExam.dto';
 import { Course, CourseDocument } from './schemas/course.schema';
 import { CourseTimetable, CourseTimetableDocument } from './schemas/course_timetable.schema';
 import { Exam, ExamDocument } from './schemas/exam.schema';
@@ -67,7 +68,8 @@ export class ExamsService {
                 espb: currCourse.espb, 
                 rok: passedExams[i].rok,
                 datum_polaganja: passedExams[i].datum_polaganja,
-                potpisao: passedExams[i].potpisao
+                potpisao: passedExams[i].potpisao,
+                broj_polaganja: passedExams[i].broj_polaganja
             };
             passed.push(json);
             totalEspb += currCourse.espb;
@@ -101,8 +103,9 @@ export class ExamsService {
         if(sem == 'januar') summerSem = false;
         else if(sem == 'jun') winterSem = false;
         for(let i = 0; i < chosen.length; i++) {
-            let temp = info.polozeni_ispiti.find(obj => {return obj.sifra == chosen[i].sifra});
-            if(!temp) {
+            let found1 = info.polozeni_ispiti.find(obj => {return obj.sifra == chosen[i].sifra});
+            let found2 = info.prijavljeni_ispiti.find(obj => {return obj.sifra == chosen[i].sifra});
+            if(!found1 && !found2) {
                 let courseSem = chosen[i].semestar;
                 if(courseSem % 2 && winterSem || !(courseSem % 2) && summerSem) {
                     let currCourse = (await courses).find(obj => {return obj.sifra == chosen[i].sifra});
@@ -115,7 +118,8 @@ export class ExamsService {
                         espb: currCourse.espb, 
                         rok: chosen[i].rok,
                         datum_polaganja: chosen[i].datum_polaganja,
-                        potpisao: chosen[i].potpisao
+                        potpisao: chosen[i].potpisao,
+                        broj_polaganja: chosen[i].broj_polaganja
                     };
                     exams.push(json);
                 }
@@ -142,7 +146,8 @@ export class ExamsService {
                 espb: currCourse.espb, 
                 rok: chosenCourses[i].rok,
                 datum_polaganja: chosenCourses[i].datum_polaganja,
-                potpisao: chosenCourses[i].potpisao
+                potpisao: chosenCourses[i].potpisao,
+                broj_polaganja: chosenCourses[i].broj_polaganja
             };
             chosen.push(json);
         }
@@ -194,12 +199,71 @@ export class ExamsService {
         return timetable;
     }
 
+    // REGISTER EXAMS
+
+    async getNumberOfRegistration(body: RegisterExamDto): Promise<any> {
+        let info = await this.studentExamsInfoModel.findOne({'student':body.index}).exec();
+        let num = 0;
+        for(let i = 0; i < info.izabrani_predmeti.length; i++) {
+            if(info.izabrani_predmeti[i].sifra == body.code) {
+                num = info.izabrani_predmeti[i].broj_polaganja;
+                break;
+            }
+        }
+        return num;
+    }
+
+    async registerExam(body: RegisterExamDto): Promise<any> {
+        let info = await this.studentExamsInfoModel.findOne({'student':body.index}).exec();
+        let exam: Exam = null;
+        let index: number = -1;
+        for(let i = 0; i < info.izabrani_predmeti.length; i++) {
+            if(info.izabrani_predmeti[i].sifra == body.code) {
+                exam = info.izabrani_predmeti[i];
+                index = i;
+                break;
+            }
+        }
+        exam.broj_polaganja++;
+        let timetable = this.getCurrExamsTimetable();
+        exam.rok = (await timetable).rok
+        info.izabrani_predmeti[index].broj_polaganja++;
+        info.prijavljeni_ispiti.push(exam);
+        await info.save();
+        return {
+            'status' : 'OK',
+            'message': 'Испит ' + exam.sifra + ' успешно пријављен!'
+        };
+    }
+
+    async unregisterExam(body: RegisterExamDto): Promise<any> {
+        let info = await this.studentExamsInfoModel.findOne({'student':body.index}).exec();
+        let exam: Exam = null;
+        let index: number = -1;
+        for(let i = 0; i < info.prijavljeni_ispiti.length; i++) {
+            if(info.prijavljeni_ispiti[i].sifra == body.code) {
+                if(info.prijavljeni_ispiti[i].broj_polaganja > 3) {
+                    // treba vratiti 1000 dinara na studentski nalog
+                }
+                exam = info.prijavljeni_ispiti[i];
+                index = i;
+                break;
+            }
+        }
+        info.prijavljeni_ispiti.splice(index, 1);
+        exam.broj_polaganja--;
+        info.izabrani_predmeti[index].broj_polaganja--;
+        await info.save();
+        return {
+            'message': 'Испит ' + exam.sifra + ' успешно одјављен!'
+        }
+    }
+
     
     // MICROSERVICE EVENTS
 
     async createStudentInfo(index: string) {
         let studentInfo = await this.studentExamsInfoModel.find({'indeks':index}).exec();
-        console.log(studentInfo);
         if(studentInfo) return;
         let info: StudentExamsInfo = new StudentExamsInfo();
         info.student = index;
@@ -252,7 +316,6 @@ export class ExamsService {
             espb_treca: 0,
             espb_cetvrta: 0
         });
-        console.log(newInfo);
         await newInfo.save();
     }
 

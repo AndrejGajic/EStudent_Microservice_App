@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ExamsService } from '../exams.service';
+import { ExamsService } from  '../services/exams.service'
 import { Ispit } from '../models/ispit';
 import { IspitInfo } from '../models/ispit_info';
 import { Kurs } from '../models/kurs';
@@ -57,6 +57,7 @@ export class CoursechoosingComponent implements OnInit {
     }
     await this.loadCourses();
     await this.loadStudentExamsInfo();
+    console.log(this.chosen);
   }
 
   async loadCourses() {

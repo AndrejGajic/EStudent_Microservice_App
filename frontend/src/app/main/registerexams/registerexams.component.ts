@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExamsService } from '../exams.service';
+import { ExamsService } from '../services/exams.service'
 import { Ispit } from '../models/ispit';
 import { IspitInfo } from '../models/ispit_info';
 import { PrijavaIspitaRok } from '../models/prijava_ispita_rok';
@@ -20,6 +20,8 @@ export class RegisterexamsComponent implements OnInit {
   examsForRegistering: IspitInfo[] = [];
   timetable: PrijavaIspitaRok = null;
 
+  errorMessage: string = '';
+
   ngOnInit(): void {
     this.examService.getCurrExamsTimetable().subscribe((timetable: PrijavaIspitaRok) => {
       this.timetable = timetable;
@@ -31,7 +33,16 @@ export class RegisterexamsComponent implements OnInit {
   }
 
   register(i: number) {
-    
+    this.examService.registerExam(this.student.indeks, this.examsForRegistering[i].sifra).subscribe((json) => {
+      console.log(json);
+      if(json['status'] != 'ERROR') {
+        alert(json['message']);
+        window.location.reload();
+      }
+      else {
+        this.errorMessage = json['message'];
+      }
+    });
   }
 
 }

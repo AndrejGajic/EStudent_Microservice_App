@@ -22,6 +22,8 @@ import { ActivateComponent } from './activate/activate.component';
 import { ChosencoursesComponent } from './chosencourses/chosencourses.component';
 import { FinancesComponent } from './finances/finances.component';
 import { SurveysComponent } from './surveys/surveys.component';
+import { CardpayComponent } from './cardpay/cardpay.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 
 
@@ -44,7 +46,9 @@ import { SurveysComponent } from './surveys/surveys.component';
     ActivateComponent,
     ChosencoursesComponent,
     FinancesComponent,
-    SurveysComponent
+    SurveysComponent,
+    CardpayComponent,
+    TransactionsComponent
   ],
   imports: [
     CommonModule,

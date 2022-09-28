@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ExamsService } from '../exams.service';
+import { ExamsService } from '../services/exams.service'
 import { BiranjePredmetaRok } from '../models/biranje_predmeta_rok';
 import { Ispit } from '../models/ispit';
 import { IspitInfo } from '../models/ispit_info';
@@ -32,6 +32,7 @@ export class ChosencoursesComponent implements OnInit {
       if(timetable) this.activeCoursesTimetable = true;
     });
     this.examService.getStudentChosenCourses(this.student.indeks).subscribe((courses: IspitInfo[]) => {
+      console.log(courses);
       this.chosen = courses;
       this.calculatePrice();
     });

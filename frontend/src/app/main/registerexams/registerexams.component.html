@@ -29,8 +29,7 @@
                             <th>Назив </th>
                             <th>Тип предмета </th>
                             <th>ЕСПБ </th>
-                            <th>Оцена </th>
-                            <th>Датум полагања </th>
+                            <th>Број пријава </th>
                             <th>Пријави</th>
                         </tr>
                     </thead>
@@ -42,12 +41,16 @@
                             <td *ngIf="ispit.izborni">Изборни предмет</td>
                             <td *ngIf="!ispit.izborni">Обавезан предмет</td>
                             <td>{{ispit.espb}}</td>
-                            <td>{{ispit.ocena}}</td>
-                            <td>{{ispit.datum_polaganja}}</td>
+                            <td>{{ispit.broj_polaganja}} </td>
                             <td><button class="btn btn-warning" (click)="register(i)">Пријави испит</button></td>
                         </tr>
                     </tbody>
                 </table>
+                <br><br>
+                <div *ngIf="errorMessage != ''">
+                    <span class="alert alert-danger">{{errorMessage}}</span>
+                </div>
+                <br><br><br>
             </div>
         </div>
         <div class="col-sm-2">

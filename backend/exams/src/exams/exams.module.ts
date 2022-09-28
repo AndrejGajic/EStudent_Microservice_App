@@ -14,7 +14,8 @@ import { ExamsTimetable, ExamsTimetableSchema } from './schemas/exams_timetable.
 @Module({
   imports: [
     ClientsModule.register([
-      { name: 'EXAMS_MAIN_SERVICE', transport: Transport.TCP, options: {port: 3000}}
+      { name: 'EXAMS_MAIN_SERVICE', transport: Transport.TCP, options: {port: 3000}},
+      { name: 'EXAMS_FINANCES_SERVICE', transport: Transport.TCP, options: {port: 3002}}
     ]),
     MongooseModule.forFeature([{name: Course.name, schema: CourseSchema}]),
     MongooseModule.forFeature([{name: Period.name, schema: PeriodSchema}]),

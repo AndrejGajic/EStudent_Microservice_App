@@ -6,13 +6,17 @@ import { StudentExamsInfo } from './schemas/studentexamsinfo.schema';
 import { Exam } from './schemas/exam.schema';
 import { ChosenExamsDto } from './dtos/chosenExams.dto';
 import { SetDebtEvent } from './events/setdebt.event';
+import { RegisterExamDto } from './dtos/registerExam.dto';
+import { deprecate } from 'util';
+import { InsertTransactionEvent } from './events/insert_transaction.event';
 
 @Controller('exams')
 export class ExamsController {
 
 
     constructor(private examsService: ExamsService,
-               @Inject('EXAMS_MAIN_SERVICE') private readonly clientMain: ClientProxy) {}
+               @Inject('EXAMS_MAIN_SERVICE') private readonly clientMain: ClientProxy,
+               @Inject('EXAMS_FINANCES_SERVICE') private readonly clientFinances: ClientProxy) {}
 
 
     // COURSES
@@ -84,6 +88,31 @@ export class ExamsController {
     @Get('/getCurrExamsTimetable')
     async getCurrExamsTimetable() {
         return await this.examsService.getCurrExamsTimetable();
+    }
+
+    // EXAM REGISTERING
+
+    @Post('/registerExam')
+    async registerExam(@Body() body: RegisterExamDto) {
+        let num = await this.examsService.getNumberOfRegistration(body);
+        if(num >= 3) {
+            let message = await this.clientMain.send('check_balance', body.index).toPromise();
+            if(message != 'OK') {
+                return {
+                    'status' : 'ERROR',
+                    'message' : 'Немате довољно средстава! Потребно је 1000 РСД за пријаву овог испита.'
+                };
+            }
+            else {
+                this.clientFinances.emit('insert_transaction', new InsertTransactionEvent(body.index, 1000, 'Надокнада за пријаву испита'));
+            }
+        }
+        return await this.examsService.registerExam(body);
+    }
+
+    @Post('unregisterExam')
+    async unregisterExam(@Body() body: RegisterExamDto) {
+        return await this.examsService.unregisterExam(body);
     }
 
     // MICROSERVICE EVENTS

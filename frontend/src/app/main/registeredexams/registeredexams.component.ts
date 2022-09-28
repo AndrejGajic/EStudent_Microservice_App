@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ExamsService } from '../exams.service';
 import { Ispit } from '../models/ispit';
 import { IspitInfo } from '../models/ispit_info';
 import { Kurs } from '../models/kurs';
+import { PrijavaIspitaRok } from '../models/prijava_ispita_rok';
+import { ExamsService } from '../services/exams.service';
 
 @Component({
   selector: 'app-registeredexams',
@@ -16,6 +17,8 @@ export class RegisteredexamsComponent implements OnInit {
   registered: IspitInfo[] = [];
   courses: Kurs[] = [];
   index: string = '';
+
+  errorMessage: string = '';
 
   async ngOnInit() {
     this.index = JSON.parse(localStorage.getItem('student')).indeks;
@@ -32,6 +35,20 @@ export class RegisteredexamsComponent implements OnInit {
     this.examsService.getAllCourses().subscribe((courses: Kurs[]) => {
       this.courses = courses;
     });
+  }
+
+  unregister(i: number) {
+    this.examsService.getCurrExamsTimetable().subscribe((timetable: PrijavaIspitaRok) => {
+      if(!timetable) this.errorMessage = 'Прошао је рок за одјаву испита!';
+      else {
+        this.examsService.unregisterExam(this.index, this.registered[i].sifra).subscribe((json) => {
+          if(json['message'] != 'ERROR') {
+            alert(json['message']);
+            window.location.reload();
+          }
+        })
+      }
+    })
   }
 
 }

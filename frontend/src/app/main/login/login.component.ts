@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MainService } from '../main.service';
+import { MainService } from '../services/main.service'
 import { Obavestenje } from '../models/obavestenje';
 import { Student } from '../models/student';
 
